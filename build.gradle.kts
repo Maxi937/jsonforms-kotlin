@@ -18,15 +18,14 @@ plugins {
     alias(libs.plugins.jetbrains.dokka).apply(true)
 }
 
-subprojects {
-
-    project.plugins.withType<KotlinJsPlugin> {
-        project.the<NodeJsEnvSpec>().apply {
-            version.set("24.4.1")
-            download = true
-        }
+plugins.withType<NodeJsPlugin> {
+    the<NodeJsEnvSpec>().apply {
+        version.set("18.20.4")
+        download.set(true)
     }
+}
 
+subprojects {
     if (pluginManager.hasPlugin("org.jlleitschuh.gradle.ktlint")) {
         configure<KtlintExtension> {
             debug.set(false)
