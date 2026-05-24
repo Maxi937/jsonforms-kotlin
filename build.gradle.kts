@@ -1,4 +1,7 @@
+import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.targets.js.KotlinJsPlugin
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsPlugin
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
 import kotlin.apply
 
@@ -17,9 +20,11 @@ plugins {
 
 subprojects {
 
-    project.the<NodeJsEnvSpec>().apply {
-        version.set("18.20.4")
-        download = true
+    project.plugins.withType<KotlinJsPlugin> {
+        project.the<NodeJsEnvSpec>().apply {
+            version.set("24.4.1")
+            download = true
+        }
     }
 
     if (pluginManager.hasPlugin("org.jlleitschuh.gradle.ktlint")) {
