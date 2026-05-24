@@ -1,4 +1,6 @@
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
+import kotlin.apply
 
 plugins {
     alias(libs.plugins.android.application).apply(false)
@@ -14,6 +16,12 @@ plugins {
 }
 
 subprojects {
+
+    project.the<NodeJsEnvSpec>().apply {
+        version.set("18.20.4")
+        download = true
+    }
+
     if (pluginManager.hasPlugin("org.jlleitschuh.gradle.ktlint")) {
         configure<KtlintExtension> {
             debug.set(false)
