@@ -1,7 +1,10 @@
+import org.gradle.kotlin.dsl.the
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.targets.js.KotlinJsPlugin
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsPlugin
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
 import kotlin.apply
 
@@ -18,10 +21,12 @@ plugins {
     alias(libs.plugins.jetbrains.dokka).apply(true)
 }
 
-plugins.withType<NodeJsPlugin> {
-    the<NodeJsEnvSpec>().apply {
-        version.set("18.20.4")
-        download.set(true)
+allprojects {
+    plugins.withType<NodeJsPlugin> {
+        the<NodeJsEnvSpec>().apply {
+            version.set("16.20.2")  // Last Node 16 release, glibc 2.17+
+            download.set(true)
+        }
     }
 }
 
