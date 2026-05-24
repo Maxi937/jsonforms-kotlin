@@ -24,6 +24,13 @@ kotlin {
 
     jvm("desktop")
 
+    js {
+        generateTypeScriptDefinitions()
+        binaries.library()
+        browser()
+    }
+
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -48,13 +55,6 @@ kotlin {
 }
 
 tasks {
-    withType<KotlinCompile> {
-        kotlinOptions {
-            freeCompilerArgs = freeCompilerArgs + listOf("-opt-in=kotlin.RequiresOptIn")
-            jvmTarget = JavaVersion.toVersion(JavaVersion.VERSION_21).toString()
-        }
-    }
-
     withType<JavaCompile> {
         val javaToolchains = project.extensions.getByType<JavaToolchainService>()
         javaCompiler.set(
